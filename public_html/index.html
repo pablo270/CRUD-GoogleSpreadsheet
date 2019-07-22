@@ -9,37 +9,37 @@ html, body, * {
 	font-size: 17px;
 }
 </style>
-<title>Googlespreadsheet</title>
+<title>CRUD - Google Spreadsheet</title>
 </head>
 <body>
 
-<input type="button" class="read" value="read db">
-<input type="button" class="doing" value="set doing">
-<input type="button" class="done" value="set done">
-<input type="button" class="add" value="add to db">
+<input type="button" class="get" value="get db">
+<input type="button" class="add" value="add row">
+<input type="button" class="update" value="update row">
+<input type="button" class="remove" value="remove row">
 <pre class="data"></pre>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
 const $ = elem => { return document.querySelector(elem) };
 var socket = io();
-$('.read').addEventListener('click', function(e){
+$('.get').addEventListener('click', function(e){
 	e.preventDefault();
-	socket.emit('read');
+	socket.emit('get');
 	return false;
 });
-$('.doing').addEventListener('click', function(e){
+$('.update').addEventListener('click', function(e){
 	e.preventDefault();
-	socket.emit('doing', {
+	socket.emit('update', {
 		barcode: "NT00000001",
 		status: "1"
 	});
 	return false;
 });
-$('.done').addEventListener('click', function(e){
+$('.remove').addEventListener('click', function(e){
 	e.preventDefault();
-	socket.emit('done', {
-		barcode: "NT00000001",
+	socket.emit('remove', {
+		barcode: "NT00000270",
 		status: "4"
 	});
 	return false;
@@ -47,14 +47,14 @@ $('.done').addEventListener('click', function(e){
 $('.add').addEventListener('click', function(e){
 	e.preventDefault();
 	socket.emit('add', {
-		name: "Teste da planilha",
+		name: "Shallow now",
 		service: "2",
 		description: "Lorem Ipsum is simply dummy text of text.",
 		status: "3",
 		price: "10",
 		barcode: "NT00000270",
-		addedat: "Sun Jul 21 2019 22:22:33 GMT-0300 (Brasilia Standard Time)",
-		finishat: ""
+		addedat: "A",
+		finishat: "B"
 	});
 	return false;
 });

@@ -1,0 +1,16 @@
+{
+  "name": "googlespreadsheet",
+  "version": "0.0.0",
+  "description": "API fila conserto - novatecn",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Pablo Santos",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "google-spreadsheet": "^2.0.7",
+    "socket.io": "^2.2.0"
+  }
+}

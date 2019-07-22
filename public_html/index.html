@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<style>
+html, body, * {
+	font-size: 17px;
+}
+</style>
+<title>Googlespreadsheet</title>
+</head>
+<body>
+
+<input type="button" class="read" value="read db">
+<input type="button" class="doing" value="set doing">
+<input type="button" class="done" value="set done">
+<input type="button" class="add" value="add to db">
+<pre class="data"></pre>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const $ = elem => { return document.querySelector(elem) };
+var socket = io();
+$('.read').addEventListener('click', function(e){
+	e.preventDefault();
+	socket.emit('read');
+	return false;
+});
+$('.doing').addEventListener('click', function(e){
+	e.preventDefault();
+	socket.emit('doing', {
+		barcode: "NT00000001",
+		status: "1"
+	});
+	return false;
+});
+$('.done').addEventListener('click', function(e){
+	e.preventDefault();
+	socket.emit('done', {
+		barcode: "NT00000001",
+		status: "4"
+	});
+	return false;
+});
+$('.add').addEventListener('click', function(e){
+	e.preventDefault();
+	socket.emit('add', {
+		name: "Teste da planilha",
+		service: "2",
+		description: "Lorem Ipsum is simply dummy text of text.",
+		status: "3",
+		price: "10",
+		barcode: "NT00000270",
+		addedat: "Sun Jul 21 2019 22:22:33 GMT-0300 (Brasilia Standard Time)",
+		finishat: ""
+	});
+	return false;
+});
+socket.on('data', function(data){
+	$('.data').innerHTML = JSON.stringify(data, null, '\t');
+});
+</script>
+
+</body>
+</html>
